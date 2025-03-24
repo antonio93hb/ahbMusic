@@ -13,3 +13,19 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Ignorar configuración de Android Studio
+.idea/
+local.properties
+
+# Ignorar archivos generados automáticamente por Gradle
+.gradle/
+build/
+
+# Ignorar archivos del sistema
+.DS_Store
+
+# Ignorar configuración de compilación de CMake y NDK
+externalNativeBuild/
+
+# Ignorar capturas de pantalla o recursos temporales
+captures/
