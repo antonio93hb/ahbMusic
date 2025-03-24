@@ -52,6 +52,20 @@ public class MainActivity extends AppCompatActivity {
         listView1.setAdapter(adapter);
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        actualizarListado();
+    }
+    private void actualizarListado() {
+        canciones = gdb.obtenerMedia();
+        if (canciones.isEmpty()) {
+            canciones.add("No hay canciones");
+        }
+        adapter.clear();
+        adapter.addAll(canciones);
+        adapter.notifyDataSetChanged();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
