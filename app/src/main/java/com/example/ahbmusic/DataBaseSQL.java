@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Pair;
 
 import androidx.annotation.Nullable;
 
@@ -53,5 +54,30 @@ public class DataBaseSQL extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("INSERT INTO media (titulo, url) VALUES ('" + titulo + "', '" + url + "')");
         return true;
+    }
+
+    public Pair<String, String> obtenerDatos(String input) {
+        //Primero parseamos el input para obtener el id
+        if (input.isEmpty()) return null;
+        int id;
+        try {
+            id = Integer.parseInt(input.split("\\.") [0]);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        //Ahora que tenemos el id hacemos una búsqueda a la bbdd
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM media WHERE id = ?", new String[]{String.valueOf(id)});
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                String titulo = cursor.getString(cursor.getColumnIndexOrThrow("titulo"));
+                String url = cursor.getString(cursor.getColumnIndexOrThrow("url"));
+                return new Pair<>(titulo, url);
+            }
+        }
+        return null;
     }
 }
