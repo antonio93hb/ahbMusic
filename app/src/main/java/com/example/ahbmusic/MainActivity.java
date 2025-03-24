@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected GestorBaseDatos gdb;
     protected ArrayList<String> canciones;
     protected ArrayAdapter adapter;
+    protected Intent pasarPantalla;
 
 
 
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.item1_menu) {
             Toast.makeText(this, "He pulsado en añadir", Toast.LENGTH_SHORT).show();
+            pasarPantalla = new Intent(MainActivity.this, CrearActivity.class);
+            startActivity(pasarPantalla);
             return true;
         } else if (id == R.id.item2_menu) {
             Toast.makeText(this, "He pulsado en salir", Toast.LENGTH_SHORT).show();
