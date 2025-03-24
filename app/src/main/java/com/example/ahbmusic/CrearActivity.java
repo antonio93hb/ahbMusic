@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +25,7 @@ protected Button button1;
 protected String containerTitle;
 protected String containerUrl;
 protected Intent pasarPantalla;
-protected GestorBaseDatos gdb;
+protected DataBaseSQL db;
 
 
     @Override
@@ -59,9 +58,9 @@ protected GestorBaseDatos gdb;
 
                     editText1.setText("");
                     editText2.setText("");
-                    gdb = new GestorBaseDatos(CrearActivity.this);
+                    db = new DataBaseSQL(CrearActivity.this);
 
-                    if (gdb.insertarMedia(containerTitle, containerUrl)) {
+                    if (db.insertarMedia(containerTitle, containerUrl)) {
                         Toast.makeText(CrearActivity.this, "Audio guardado correctamente.", Toast.LENGTH_SHORT).show();
                         pasarPantalla = new Intent(CrearActivity.this, MainActivity.class);
                         startActivity(pasarPantalla);

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     protected TextView textView1;
     protected ListView listView1;
-    protected GestorBaseDatos gdb;
+    protected DataBaseSQL db;
     protected ArrayList<String> canciones;
     protected ArrayAdapter adapter;
     protected Intent pasarPantalla;
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         textView1 = findViewById(R.id.textView1_main);
         listView1 = findViewById(R.id.listView1_main);
-        gdb = new GestorBaseDatos(MainActivity.this);
-        canciones = gdb.obtenerMedia();
+        db = new DataBaseSQL(MainActivity.this);
+        canciones = db.obtenerMedia();
 
         if (canciones.isEmpty()) {
             canciones.add("No hay canciones");
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         actualizarListado();
     }
     private void actualizarListado() {
-        canciones = gdb.obtenerMedia();
+        canciones = db.obtenerMedia();
         if (canciones.isEmpty()) {
             canciones.add("No hay canciones");
         }

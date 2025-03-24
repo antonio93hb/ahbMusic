@@ -9,9 +9,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class GestorBaseDatos extends SQLiteOpenHelper {
+public class DataBaseSQL extends SQLiteOpenHelper {
 
-    public GestorBaseDatos(@Nullable Context context) {
+    public DataBaseSQL(@Nullable Context context) {
         super(context, "audio", null, 1);
     }
 
