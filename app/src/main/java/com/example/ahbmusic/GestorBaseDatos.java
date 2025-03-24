@@ -48,4 +48,10 @@ public class GestorBaseDatos extends SQLiteOpenHelper {
         }
         return canciones;
     }
+
+    public boolean insertarMedia(String titulo, String url) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("INSERT INTO media (titulo, url) VALUES ('" + titulo + "', '" + url + "')");
+        return true;
+    }
 }
