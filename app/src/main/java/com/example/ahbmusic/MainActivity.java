@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,9 +16,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     protected TextView textView1;
     protected ListView listView1;
+    protected GestorBaseDatos gdb;
+    protected ArrayList<String> canciones;
+    protected ArrayAdapter adapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
 
         textView1 = findViewById(R.id.textView1_main);
         listView1 = findViewById(R.id.listView1_main);
+        gdb = new GestorBaseDatos(MainActivity.this);
+        canciones = gdb.obtenerMedia();
+
+        if (canciones.isEmpty()) {
+            canciones.add("No hay canciones");
+        }
+
+        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, canciones);
+        listView1.setAdapter(adapter);
 
     }
 
