@@ -20,10 +20,11 @@ public class DataBaseSQL extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE media (id INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, url TEXT)");
 
-        db.execSQL("INSERT INTO media (titulo, url) VALUES ('Titulo1', 'url1')");
-        db.execSQL("INSERT INTO media (titulo, url) VALUES ('Titulo2', 'url2')");
-        db.execSQL("INSERT INTO media (titulo, url) VALUES ('Titulo3', 'url3')");
-
+        db.execSQL("INSERT INTO media (titulo, url) VALUES ('SoundHelix', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')");
+        db.execSQL("INSERT INTO media (titulo, url) VALUES ('Sample MP3', 'https://filesamples.com/samples/audio/mp3/sample1.mp3')");
+        //db.execSQL("INSERT INTO media (titulo, url) VALUES ('Upbeat Pop Guitar', 'https://cdn.pixabay.com/download/audio/2023/03/01/audio_54321.mp3')");
+        //db.execSQL("INSERT INTO media (titulo, url) VALUES ('Ambient Chillout', 'https://cdn.pixabay.com/download/audio/2023/03/01/audio_98765.mp3')");
+        //db.execSQL("INSERT INTO media (titulo, url) VALUES ('Energetic Rock Background', 'https://cdn.pixabay.com/download/audio/2023/03/01/audio_19283.mp3')");
     }
 
     @Override

@@ -22,6 +22,7 @@ protected TextView textView3;
 protected EditText editText1;
 protected EditText editText2;
 protected Button button1;
+protected Button button2;
 protected String containerTitle;
 protected String containerUrl;
 protected Intent pasarPantalla;
@@ -45,21 +46,19 @@ protected DataBaseSQL db;
         editText1 = (EditText) findViewById(R.id.editText1_crear);
         editText2 = (EditText) findViewById(R.id.editText2_crear);
         button1 = (Button) findViewById(R.id.button1_crear);
+        button2 = (Button) findViewById(R.id.button2_crear);
         
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 containerTitle = editText1.getText().toString();
                 containerUrl = editText2.getText().toString();
-                
                 if (containerTitle.isEmpty() || containerUrl.isEmpty()) {
                     Toast.makeText(CrearActivity.this, "Debes de rellenar todos los campos", Toast.LENGTH_SHORT).show();
                 } else {
-
                     editText1.setText("");
                     editText2.setText("");
                     db = new DataBaseSQL(CrearActivity.this);
-
                     if (db.insertarMedia(containerTitle, containerUrl)) {
                         Toast.makeText(CrearActivity.this, "Audio guardado correctamente.", Toast.LENGTH_SHORT).show();
                         pasarPantalla = new Intent(CrearActivity.this, MainActivity.class);
@@ -67,11 +66,15 @@ protected DataBaseSQL db;
                     } else {
                         Toast.makeText(CrearActivity.this, "No se ha podido guardar el archivo", Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
             }
         });
-
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pasarPantalla = new Intent(CrearActivity.this, MainActivity.class);
+                startActivity(pasarPantalla);
+            }
+        });
     }
 }

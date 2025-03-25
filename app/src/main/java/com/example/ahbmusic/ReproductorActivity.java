@@ -1,6 +1,8 @@
 package com.example.ahbmusic;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,8 @@ public class ReproductorActivity extends AppCompatActivity {
     protected String paquete1 = "";
     protected String paquete2 = "";
     protected Intent pasarPantalla;
+    protected MediaPlayer mediaPlayer;
+    protected float milisegundo = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,59 @@ public class ReproductorActivity extends AppCompatActivity {
         }
         textView2.setText("Título: " + paquete1);
         textView3.setText("URL: " + paquete2);
+        
+        buttonPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (milisegundo > 0) {
+                    mediaPlayer.start();
+                } else if (milisegundo < 0) {
+                    mediaPlayer.prepareAsync();
+                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mediaPlayer.start();
+                        }
+                    });
+                } else {
+                    try {
+                        mediaPlayer = new MediaPlayer();
+                        mediaPlayer.setDataSource(paquete2);
+                        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                        mediaPlayer.prepareAsync();
+                        Toast.makeText(ReproductorActivity.this, "Cargando...", Toast.LENGTH_SHORT).show();
+
+                        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mp) {
+                                mediaPlayer.start();
+                                Toast.makeText(ReproductorActivity.this, "Reproduciendo", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } catch (Exception e) {
+                        Toast.makeText(ReproductorActivity.this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        buttonPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                milisegundo = mediaPlayer.getCurrentPosition();
+                mediaPlayer.pause();
+            }
+        });
+
+        buttonStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                milisegundo = -1;
+                mediaPlayer.stop();
+            }
+        });
+
+
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +119,5 @@ public class ReproductorActivity extends AppCompatActivity {
                 startActivity(pasarPantalla);
             }
         });
-
     }
 }
