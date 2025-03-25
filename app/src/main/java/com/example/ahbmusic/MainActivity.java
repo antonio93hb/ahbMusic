@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
     @Override
     public void onResume() {
@@ -104,12 +103,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.item1_menu) {
-            Toast.makeText(this, "He pulsado en añadir", Toast.LENGTH_SHORT).show();
             pasarPantalla = new Intent(MainActivity.this, CrearActivity.class);
             startActivity(pasarPantalla);
             return true;
         } else if (id == R.id.item2_menu) {
-            Toast.makeText(this, "He pulsado en salir", Toast.LENGTH_SHORT).show();
+            System.exit(0);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
