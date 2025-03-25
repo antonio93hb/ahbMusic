@@ -76,6 +76,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        listView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+
+                boolean eliminado = db.eliminarMedia(item);
+
+                if (eliminado) {
+                    Toast.makeText(MainActivity.this, "Audio eliminado correctamente", Toast.LENGTH_SHORT).show();
+                    actualizarListado();
+                } else {
+                    Toast.makeText(MainActivity.this, "No se ha podido eliminar el audio", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
     }
     @Override
     public void onResume() {
