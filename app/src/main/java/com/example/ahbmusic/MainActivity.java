@@ -2,9 +2,12 @@ package com.example.ahbmusic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,11 +24,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     protected TextView textView1;
     protected ListView listView1;
-    protected GestorBaseDatos gdb;
+    protected DataBaseSQL db;
     protected ArrayList<String> canciones;
     protected ArrayAdapter adapter;
     protected Intent pasarPantalla;
-
+    protected String containerItem;
+    protected String titulo;
+    protected String url;
 
 
     @Override
@@ -41,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
         textView1 = findViewById(R.id.textView1_main);
         listView1 = findViewById(R.id.listView1_main);
-        gdb = new GestorBaseDatos(MainActivity.this);
-        canciones = gdb.obtenerMedia();
+        db = new DataBaseSQL(MainActivity.this);
+        canciones = db.obtenerMedia();
 
         if (canciones.isEmpty()) {
             canciones.add("No hay canciones");
@@ -51,6 +56,27 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, canciones);
         listView1.setAdapter(adapter);
 
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                containerItem = parent.getItemAtPosition(position).toString();
+
+                Pair<String, String> datos = db.obtenerDatos(containerItem);
+                if (datos != null) {
+                    titulo = datos.first;
+                    url = datos.second;
+
+                    pasarPantalla = new Intent(MainActivity.this, ReproductorActivity.class);
+                    pasarPantalla.putExtra("titulo", titulo);
+                    pasarPantalla.putExtra("url", url);
+                    startActivity(pasarPantalla);
+                } else {
+                    pasarPantalla = new Intent(MainActivity.this, ReproductorActivity.class);
+                    startActivity(pasarPantalla);
+                }
+            }
+        });
+
     }
     @Override
     public void onResume() {
@@ -58,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         actualizarListado();
     }
     private void actualizarListado() {
-        canciones = gdb.obtenerMedia();
+        canciones = db.obtenerMedia();
         if (canciones.isEmpty()) {
             canciones.add("No hay canciones");
         }
