@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         canciones = db.obtenerMedia();
 
         if (canciones.isEmpty()) {
-            canciones.add("No hay canciones");
+            canciones.add(getString(R.string.noHayCanciones));
         }
 
         adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, canciones);
@@ -85,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
                 boolean eliminado = db.eliminarMedia(item);
 
                 if (eliminado) {
-                    Toast.makeText(MainActivity.this, "Audio eliminado correctamente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getString(R.string.audioEliminado), Toast.LENGTH_SHORT).show();
                     actualizarListado();
                 } else {
-                    Toast.makeText(MainActivity.this, "No se ha podido eliminar el audio", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getString(R.string.noSeHaPodidoEliminarElAudio), Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     private void actualizarListado() {
         canciones = db.obtenerMedia();
         if (canciones.isEmpty()) {
-            canciones.add("No hay canciones");
+            canciones.add(getString(R.string.noHayCanciones));
         }
         adapter.clear();
         adapter.addAll(canciones);

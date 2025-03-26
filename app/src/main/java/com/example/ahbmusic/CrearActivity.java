@@ -28,7 +28,6 @@ protected String containerUrl;
 protected Intent pasarPantalla;
 protected DataBaseSQL db;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,21 +53,22 @@ protected DataBaseSQL db;
                 containerTitle = editText1.getText().toString();
                 containerUrl = editText2.getText().toString();
                 if (containerTitle.isEmpty() || containerUrl.isEmpty()) {
-                    Toast.makeText(CrearActivity.this, "Debes de rellenar todos los campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CrearActivity.this, getString(R.string.debesRellenar), Toast.LENGTH_SHORT).show();
                 } else {
                     editText1.setText("");
                     editText2.setText("");
                     db = new DataBaseSQL(CrearActivity.this);
                     if (db.insertarMedia(containerTitle, containerUrl)) {
-                        Toast.makeText(CrearActivity.this, "Audio guardado correctamente.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CrearActivity.this,getString(R.string.audioGuardado), Toast.LENGTH_SHORT).show();
                         pasarPantalla = new Intent(CrearActivity.this, MainActivity.class);
                         startActivity(pasarPantalla);
                     } else {
-                        Toast.makeText(CrearActivity.this, "No se ha podido guardar el archivo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CrearActivity.this, getString(R.string.noSeHaPodidoGuardarElArchivo), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
+
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
