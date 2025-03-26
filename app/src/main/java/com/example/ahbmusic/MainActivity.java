@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         canciones = db.obtenerMedia();
 
         if (canciones.isEmpty()) {
-            canciones.add("No hay canciones");
+            canciones.add(getString(R.string.noHayCanciones));
         }
 
         adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, canciones);
@@ -77,6 +77,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        listView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+
+                boolean eliminado = db.eliminarMedia(item);
+
+                if (eliminado) {
+                    Toast.makeText(MainActivity.this, getString(R.string.audioEliminado), Toast.LENGTH_SHORT).show();
+                    actualizarListado();
+                } else {
+                    Toast.makeText(MainActivity.this, getString(R.string.noSeHaPodidoEliminarElAudio), Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
     }
     @Override
     public void onResume() {
@@ -86,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     private void actualizarListado() {
         canciones = db.obtenerMedia();
         if (canciones.isEmpty()) {
-            canciones.add("No hay canciones");
+            canciones.add(getString(R.string.noHayCanciones));
         }
         adapter.clear();
         adapter.addAll(canciones);
@@ -104,12 +120,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.item1_menu) {
-            Toast.makeText(this, "He pulsado en añadir", Toast.LENGTH_SHORT).show();
             pasarPantalla = new Intent(MainActivity.this, CrearActivity.class);
             startActivity(pasarPantalla);
             return true;
         } else if (id == R.id.item2_menu) {
-            Toast.makeText(this, "He pulsado en salir", Toast.LENGTH_SHORT).show();
+            System.exit(0);
             return true;
         } else {
             return super.onOptionsItemSelected(item);

@@ -9,5 +9,5 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/item2_menu"
-        android:title="Salir" />
+        android:title="@string/salir" />
 </menu>

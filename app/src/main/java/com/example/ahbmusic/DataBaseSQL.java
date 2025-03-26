@@ -67,7 +67,6 @@ public class DataBaseSQL extends SQLiteOpenHelper {
             e.printStackTrace();
             return null;
         }
-
         //Ahora que tenemos el id hacemos una búsqueda a la bbdd
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM media WHERE id = ?", new String[]{String.valueOf(id)});
@@ -80,5 +79,18 @@ public class DataBaseSQL extends SQLiteOpenHelper {
             }
         }
         return null;
+    }
+    public boolean eliminarMedia(String input) {
+        if (input.isEmpty()) return false;
+        int id;
+        try {
+            id = Integer.parseInt(input.split("\\.") [0]);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return false;
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+        int filaEliminada = db.delete("media", "id = ?", new String[]{String.valueOf(id)});
+        return filaEliminada > 0;
     }
 }

@@ -54,10 +54,10 @@ public class ReproductorActivity extends AppCompatActivity {
         paquete1 = extra.getString("titulo");
         paquete2 = extra.getString("url");
         if (paquete1.isEmpty() || paquete2.isEmpty()) {
-            Toast.makeText(this, "Imposible reproducir el audio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.imposibleReproducirElAudio), Toast.LENGTH_SHORT).show();
         }
-        textView2.setText("Título: " + paquete1);
-        textView3.setText("URL: " + paquete2);
+        textView2.setText(getString(R.string.titulo) + ": " + paquete1);
+        textView3.setText(getString(R.string.urlAudio) + ": " + paquete2);
         
         buttonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,17 +78,16 @@ public class ReproductorActivity extends AppCompatActivity {
                         mediaPlayer.setDataSource(paquete2);
                         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                         mediaPlayer.prepareAsync();
-                        Toast.makeText(ReproductorActivity.this, "Cargando...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ReproductorActivity.this, getString(R.string.cargando), Toast.LENGTH_SHORT).show();
 
                         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
                             public void onPrepared(MediaPlayer mp) {
                                 mediaPlayer.start();
-                                Toast.makeText(ReproductorActivity.this, "Reproduciendo", Toast.LENGTH_SHORT).show();
                             }
                         });
                     } catch (Exception e) {
-                        Toast.makeText(ReproductorActivity.this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ReproductorActivity.this, getString(R.string.haOcurridoUnError), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -109,8 +108,6 @@ public class ReproductorActivity extends AppCompatActivity {
                 mediaPlayer.stop();
             }
         });
-
-
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
