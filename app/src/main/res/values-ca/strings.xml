@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">AhbMusic</string>
+    <string name="playListOnline">PlayList Online CA</string>
+    <string name="salir">Salir CA</string>
+    <string name="anadirAudioOnline">Añadir audio online CA</string>
+    <string name="titulo">Título CA</string>
+    <string name="introducirTitulo">Introducir el título del audio CA</string>
+    <string name="urlAudio">URL audio CA</string>
+    <string name="introducirUrl">Introducir la URL del audio CA</string>
+    <string name="crearAudio">CREAR AUDIO CA</string>
+    <string name="volver">VOLVER CA</string>
+    <string name="debesRellenar">Debes de rellenar todos los campos CA</string>
+    <string name="audioGuardado">Audio guardado correctamente. CA</string>
+    <string name="reproductorAudioOnline">Reproductor Audio Online CA</string>
+    <string name="cargando">Cargando... CA</string>
+    <string name="audioEliminado">Audio eliminado correctamente. CA</string>
+    <string name="noSeHaPodidoGuardarElArchivo">No se ha podido guardar el archivo CA</string>
+    <string name="noHayCanciones">No hay canciones CA</string>
+    <string name="noSeHaPodidoEliminarElAudio">No se ha podido eliminar el audio CA</string>
+    <string name="imposibleReproducirElAudio">Imposible reproducir el audio CA</string>
+    <string name="haOcurridoUnError">Ha ocurrido un error CA</string>
+</resources>
