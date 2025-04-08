@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(pasarPantalla);
             return true;
         } else if (id == R.id.item2_menu) {
-            System.exit(0);
+            finishAffinity();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
